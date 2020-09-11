@@ -25,6 +25,16 @@ const getKeyValue = (input) => {
     }
   }
 
+  if (input.includes('in')) {
+    const [key, valueString] = input.split(' in ')
+    const cleanValueString = valueString.slice(1, -1)
+    const values = cleanValueString.split(',')
+
+    return {
+      [key]: { $in: values }
+    }
+  }
+
   return {
     name: input,
   }
