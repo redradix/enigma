@@ -15,7 +15,7 @@ describe('eNiGmA', () => {
     })
   })
 
-  describe('Returns the string as a value with "name" as the key when the received string doesn\'t have the first part', () => {
+  describe('Managing the input when it only receives the second part', () => {
     const SAMPLES = [
       { input: 'foo', expected: { name: 'foo' } },
       { input: 'bar', expected: { name: 'bar' } },
