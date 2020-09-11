@@ -1,16 +1,15 @@
 const eNiGmA = (input) => {
-
   if (input.includes('and')) {
-    const [first, second] = input.split(' and ')
+    const clauses = input.split(' and ')
     return {
-      $and: [bla(first), bla(second)]
+      $and: clauses.map(divideByEqual),
     }
   } else {
-    return bla(input)
+    return divideByEqual(input)
   }
 }
 
-const bla = (input) => {
+const divideByEqual = (input) => {
   if (input.includes('=')) {
     const [key, value] = input.split(' = ')
     return {

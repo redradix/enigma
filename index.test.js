@@ -41,8 +41,15 @@ describe('eNiGmA', () => {
           ]
         }
       },
-      // { input: 'bar', expected: { name: 'bar' } },
-      // { input: 'lol', expected: { name: 'lol' } },
+      {
+        input: 'name = foo and tag = triki and hello = goodbye', expected: {
+          $and: [
+            { name: 'foo' },
+            { tag: 'triki' },
+            { hello: 'goodbye' },
+          ]
+        }
+      },
     ]
 
     SAMPLES.forEach(sample => {
