@@ -4,7 +4,7 @@
 // 'tag in (triki,traun)' => { tag: { $in: ['triki', 'traun'] } }
 // 'name not bla' => { name: { $not: 'bla' } }
 
-const splitStringWithAnIn = (string) => {
+const parseSpecialOperator = (string) => {
   const [key, subkey, value] = string.split(' ')
 
   return {
@@ -26,8 +26,8 @@ const enigma = string => {
     const [key, operation, value] = elements
 
     switch (operation) {
-      case 'in': return splitStringWithAnIn(string)
-      case 'not': return splitStringWithAnIn(string)
+      case 'in': return parseSpecialOperator(string)
+      case 'not': return parseSpecialOperator(string)
       case '=': return { [key.trim()]: value.trim() }
     }
   }
