@@ -1,24 +1,24 @@
-const eNiGmA = (input) => {
-
+// sentence = a set of clauses separated by conjunctions
+const parseSentence = (input) => {
   if (input.includes('and')) {
     const clauses = input.split(' and ')
     return {
-      $and: clauses.map(getKeyValue),
+      $and: clauses.map(parseClause),
     }
   }
 
   if (input.includes('or')) {
     const clauses = input.split(' or ')
     return {
-      $or: clauses.map(getKeyValue),
+      $or: clauses.map(parseClause),
     }
   }
 
-  return getKeyValue(input)
+  return parseClause(input)
 }
 
-const getKeyValue = (input) => {
-
+// clause = key and value related by an operator
+const parseClause = (input) => {
   if (input.includes('=')) {
     const [key, value] = input.split(' = ')
     return {
@@ -56,12 +56,8 @@ const getKeyValue = (input) => {
   return {
     name: input,
   }
-
 }
 
 module.exports = {
-  eNiGmA,
+  eNiGmA: parseSentence,
 }
-
-
-// 'name not bla' => { name: { $not: 'bla' } }
