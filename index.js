@@ -18,10 +18,6 @@ const parseSpecialOperator = (string) => {
 const enigma = string => {
   const elements = string.split(' ')
 
-  if (elements.length === 1) {
-    return { name: elements[0] }
-  }
-
   if (elements.length === 3) {
     const [key, operation, value] = elements
 
@@ -31,6 +27,8 @@ const enigma = string => {
       case '=': return { [key.trim()]: value.trim() }
     }
   }
+
+  return { name: elements[0] }
 }
 
 module.exports = {
