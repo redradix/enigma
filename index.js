@@ -1,5 +1,7 @@
 const eNiGmA = (value) => {
- return value.includes('foo') ? { name: 'foo' } : { name: 'bar' }
+  return {
+    name: value.includes('foo') ? 'foo' : 'bar'
+  }
 }
 
 module.exports = {
