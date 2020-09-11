@@ -12,7 +12,7 @@ const example = (title, samples) => {
 
 describe('eNiGmA', () => {
   example(
-    'Returns first part of the string as the key and the second part of it as the value of the object ',
+    'Handles the "=" operator',
     [
       { input: 'name = foo', expected: { name: 'foo' } },
       { input: 'name = bar', expected: { name: 'bar' } },
@@ -23,7 +23,7 @@ describe('eNiGmA', () => {
   )
 
   example(
-    'Managing the input when it only receives the second part',
+    'Handles the IMPLICIT "=" operator (no key)',
     [
       { input: 'foo', expected: { name: 'foo' } },
       { input: 'bar', expected: { name: 'bar' } },
@@ -32,7 +32,7 @@ describe('eNiGmA', () => {
   )
 
   example(
-    'Managing the input when receiving more than one value',
+    'Handles the "and" conjunctiohn',
     [
       {
         input: 'name = foo and tag = triki', expected: {
@@ -55,7 +55,7 @@ describe('eNiGmA', () => {
   )
 
   example(
-    'Managing the input when receiving a "not" inside',
+    'Handles the "not" operator',
     [
       {
         input: 'name not bla', expected: { name: { $not: 'bla' } }
@@ -71,7 +71,7 @@ describe('eNiGmA', () => {
 
 
   example(
-    'Managing the input when receiving a "not" inside',
+    'Handles the "in" operator',
     [
       {
         input: 'name in (foo,bar,baz)', expected: { name: { $in: ['foo', 'bar', 'baz'] } },
@@ -81,7 +81,7 @@ describe('eNiGmA', () => {
   )
 
   example(
-    'Managing the input when receiving "or" inside the input',
+    'Handles the "or" conjunction',
     [
       {
         input: 'name = foo or tag = triki', expected: {
@@ -104,7 +104,7 @@ describe('eNiGmA', () => {
   )
 
   example(
-    'Managing the input when receiving "not in" inside the input',
+    'Handles the "not in" operator',
     [
       {
         input: 'name not in (bla,ble)',
