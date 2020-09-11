@@ -23,6 +23,12 @@ const enigma = string => {
     }
   }
 
+  if (string.includes('or')) {
+    return {
+      $or: string.split(' or ').map(enigma)
+    }
+  }
+
   const elements = string.split(' ')
 
   if (elements.length === 3) {
