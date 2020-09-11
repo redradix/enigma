@@ -6,6 +6,7 @@ describe('eNiGmA', () => {
       { input: 'name = foo', expected: { name: 'foo' } },
       { input: 'name = bar', expected: { name: 'bar' } },
       { input: 'name = lol', expected: { name: 'lol' } },
+      { input: 'tag = triki', expected: { tag: 'triki' } },
     ]
 
     SAMPLES.forEach(sample => {

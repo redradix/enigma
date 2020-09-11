@@ -1,14 +1,14 @@
 const eNiGmA = (input) => {
-  let value
+  let key = 'name', value
 
   if (input.includes('=')) {
-    ([, value] = input.split(' = '))
+    ([key, value] = input.split(' = '))
   } else {
     value = input
   }
 
   return {
-    name: value,
+    [key]: value,
   }
 }
 
