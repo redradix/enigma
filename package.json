@@ -1,0 +1,13 @@
+{
+  "name": "enigma",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Victor Miguez <victor@redradix.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --watchAll --coverage"
+  },
+  "dependencies": {
+    "jest": "^26.4.2"
+  }
+}
