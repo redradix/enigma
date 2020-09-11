@@ -14,6 +14,20 @@ describe('eNiGmA', () => {
       })
     })
   })
+
+  describe('Returns the string as a value with "name" as the key when the received string doesn\'t have the first part', () => {
+    const SAMPLES = [
+      { input: 'foo', expected: { name: 'foo' } },
+      { input: 'bar', expected: { name: 'bar' } },
+      { input: 'lol', expected: { name: 'lol' } },
+    ]
+
+    SAMPLES.forEach(sample => {
+      it(`expects ${sample.input} to return ${JSON.stringify(sample.expected)}`, () => {
+        expect(eNiGmA(sample.input)).toEqual(sample.expected)
+      })
+    })
+  })
 })
 
 

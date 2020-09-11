@@ -1,5 +1,11 @@
 const eNiGmA = (input) => {
-  const [, value] = input.split(' = ')
+  let value
+
+  if (input.includes('=')) {
+    ([, value] = input.split(' = '))
+  } else {
+    value = input
+  }
 
   return {
     name: value,
