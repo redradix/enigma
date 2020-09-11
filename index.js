@@ -15,6 +15,11 @@ const getKeyValue = (input) => {
     return {
       [key]: value,
     }
+  } else if (input.includes('not')) {
+    const [key, value] = input.split(' not ')
+    return {
+      [key]: { $not: value },
+    }
   } else {
     return {
       name: input,
@@ -25,3 +30,6 @@ const getKeyValue = (input) => {
 module.exports = {
   eNiGmA,
 }
+
+
+// 'name not bla' => { name: { $not: 'bla' } }

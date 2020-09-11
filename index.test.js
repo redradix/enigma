@@ -58,8 +58,28 @@ describe('eNiGmA', () => {
       })
     })
   })
+
+  describe('Managing the input when receiving a "not" inside', () => {
+    const SAMPLES = [
+      {
+        input: 'name not bla', expected: { name: { $not: 'bla' } }
+      },
+      {
+        input: 'full not pep', expected: { full: { $not: 'pep' } }
+      },
+      {
+        input: 'lol not pro', expected: { lol: { $not: 'pro' } }
+      }
+    ]
+
+    SAMPLES.forEach(sample => {
+      it(`expects ${sample.input} to return ${JSON.stringify(sample.expected)}`, () => {
+        expect(eNiGmA(sample.input)).toEqual(sample.expected)
+      })
+    })
+  })
 })
 
 
 
-// 'bla' => { name: 'bla' }
+// 'name not bla' => { name: { $not: 'bla' } }
