@@ -2,21 +2,17 @@
 // 'bla' => { name: 'bla' }
 
 // string => obj
-const enigma = (string) => {
-  let value = null;
-  const elements = string.split("=");
+const enigma = string => {
+  const elements = string.split('=')
 
   if (elements.length === 1) {
-    value = elements[0];
+    return { name: elements[0] }
   } else {
-    value = elements[1].trim();
+    const [key, value] = elements
+    return { [key.trim()]: value.trim() }
   }
-
-  return {
-    name: value,
-  };
-};
+}
 
 module.exports = {
   enigma,
-};
+}

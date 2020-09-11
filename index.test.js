@@ -7,4 +7,7 @@ describe('eNiGmA', () => {
   it("'bla' must return { name: 'bla' }", () => {
     expect(enigma('bla')).toEqual({ name: 'bla' })
   })
+  it("'tag = triki' must return { tag: triki }", () => {
+    expect(enigma('tag = triki')).toEqual({ tag: 'triki' })
+  })
 })
