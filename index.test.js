@@ -1,38 +1,39 @@
 const { eNiGmA } = require('./index')
 
+const example = (title, samples) => {
+  describe(title, () => {
+    samples.forEach(sample => {
+      it(`expects ${sample.input} to return ${JSON.stringify(sample.expected)}`, () => {
+        expect(eNiGmA(sample.input)).toEqual(sample.expected)
+      })
+    })
+  })
+}
+
 describe('eNiGmA', () => {
-  describe('Returns first part of the string as the key and the second part of it as the value of the object ', () => {
-    const SAMPLES = [
+  example(
+    'Returns first part of the string as the key and the second part of it as the value of the object ',
+    [
       { input: 'name = foo', expected: { name: 'foo' } },
       { input: 'name = bar', expected: { name: 'bar' } },
       { input: 'name = lol', expected: { name: 'lol' } },
       { input: 'tag = triki', expected: { tag: 'triki' } },
       { input: 'hello = goodbye', expected: { hello: 'goodbye' } },
-    ]
+    ],
+  )
 
-    SAMPLES.forEach(sample => {
-      it(`expects ${sample.input} to return ${JSON.stringify(sample.expected)}`, () => {
-        expect(eNiGmA(sample.input)).toEqual(sample.expected)
-      })
-    })
-  })
-
-  describe('Managing the input when it only receives the second part', () => {
-    const SAMPLES = [
+  example(
+    'Managing the input when it only receives the second part',
+    [
       { input: 'foo', expected: { name: 'foo' } },
       { input: 'bar', expected: { name: 'bar' } },
       { input: 'lol', expected: { name: 'lol' } },
-    ]
+    ],
+  )
 
-    SAMPLES.forEach(sample => {
-      it(`expects ${sample.input} to return ${JSON.stringify(sample.expected)}`, () => {
-        expect(eNiGmA(sample.input)).toEqual(sample.expected)
-      })
-    })
-  })
-
-  describe('Managing the input when receiving more than one value', () => {
-    const SAMPLES = [
+  example(
+    'Managing the input when receiving more than one value',
+    [
       {
         input: 'name = foo and tag = triki', expected: {
           $and: [
@@ -51,16 +52,11 @@ describe('eNiGmA', () => {
         }
       },
     ]
+  )
 
-    SAMPLES.forEach(sample => {
-      it(`expects ${sample.input} to return ${JSON.stringify(sample.expected)}`, () => {
-        expect(eNiGmA(sample.input)).toEqual(sample.expected)
-      })
-    })
-  })
-
-  describe('Managing the input when receiving a "not" inside', () => {
-    const SAMPLES = [
+  example(
+    'Managing the input when receiving a "not" inside',
+    [
       {
         input: 'name not bla', expected: { name: { $not: 'bla' } }
       },
@@ -71,32 +67,22 @@ describe('eNiGmA', () => {
         input: 'lol not pro', expected: { lol: { $not: 'pro' } }
       }
     ]
-
-    SAMPLES.forEach(sample => {
-      it(`expects ${sample.input} to return ${JSON.stringify(sample.expected)}`, () => {
-        expect(eNiGmA(sample.input)).toEqual(sample.expected)
-      })
-    })
-  })
+  )
 
 
-  describe('Managing the input when receiving a "not" inside', () => {
-    const SAMPLES = [
+  example(
+    'Managing the input when receiving a "not" inside',
+    [
       {
         input: 'name in (foo,bar,baz)', expected: { name: { $in: ['foo', 'bar', 'baz'] } },
         input: 'test in (1,2,3)', expected: { test: { $in: ['1', '2', '3'] } },
       },
     ]
+  )
 
-    SAMPLES.forEach(sample => {
-      it(`expects ${sample.input} to return ${JSON.stringify(sample.expected)}`, () => {
-        expect(eNiGmA(sample.input)).toEqual(sample.expected)
-      })
-    })
-  })
-
-  describe('Managing the input when receiving "or" inside the input', () => {
-    const SAMPLES = [
+  example(
+    'Managing the input when receiving "or" inside the input',
+    [
       {
         input: 'name = foo or tag = triki', expected: {
           $or: [
@@ -115,11 +101,5 @@ describe('eNiGmA', () => {
         }
       },
     ]
-
-    SAMPLES.forEach(sample => {
-      it(`expects ${sample.input} to return ${JSON.stringify(sample.expected)}`, () => {
-        expect(eNiGmA(sample.input)).toEqual(sample.expected)
-      })
-    })
-  })
+  )
 })
