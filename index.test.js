@@ -1,3 +1,5 @@
+const { eNiGmA } = require('./index')
+
 describe('eNiGmA', () => {
   /*
 
