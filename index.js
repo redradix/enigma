@@ -9,7 +9,7 @@ const splitStringWithAnIn = (string) => {
 
   return {
     [key]: {
-      [`\$${subkey}`]: value.replace(/[\(\)]/g, '').split(','),
+      [`\$${subkey}`]: (value.startsWith('(')) ? value.replace(/[\(\)]/g, '').split(',') : value,
     }
   }
 }
@@ -17,10 +17,6 @@ const splitStringWithAnIn = (string) => {
 // string => obj
 const enigma = string => {
   const elements = string.split(' ')
-
-  if (string.includes('in')) {
-    return splitStringWithAnIn(string)
-  }
 
   if (elements.length === 1) {
     return { name: elements[0] }
@@ -31,12 +27,11 @@ const enigma = string => {
 
     switch (operation) {
       case 'in': return splitStringWithAnIn(string)
+      case 'not': return splitStringWithAnIn(string)
       case '=': return { [key.trim()]: value.trim() }
     }
   }
 }
-
-console.log(enigma('name not bla'))
 
 module.exports = {
   enigma,
