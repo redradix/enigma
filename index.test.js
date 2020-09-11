@@ -13,4 +13,7 @@ describe('eNiGmA', () => {
   it("'tag in (triki,traun)' must return { tag: { $in: ['triki', 'traun'] } }", () => {
     expect(enigma('tag in (triki,traun)')).toEqual({ tag: { $in: ['triki', 'traun'] } })
   })
+  it("'name not bla' => { name: { $not: 'bla' } }", () => {
+    expect(enigma('name not bla')).toEqual({ name: { $not: 'bla' } })
+  })
 })
