@@ -22,8 +22,12 @@ describe('eNiGmA', () => {
       input: 'name not bla',
       output: { name: { $not: 'bla' } },
     },
+    {
+      input: 'name not in (bla,ble,bli)',
+      output: { name: { $nin: ['bla', 'ble', 'bli'] } },
+    },
   ).forEach(({ input, output }) => {
-    it(`${ input } must return ${ JSON.stringify(output) }`, () => {
+    it(`${input} must return ${JSON.stringify(output)}`, () => {
       expect(enigma(input)).toEqual(output)
     })
   })

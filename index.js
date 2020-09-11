@@ -3,14 +3,15 @@
 // 'tag = triki' => { tag: triki }
 // 'tag in (triki,traun)' => { tag: { $in: ['triki', 'traun'] } }
 // 'name not bla' => { name: { $not: 'bla' } }
+// 'name not in (bla,ble,bli)' => { name: { $nin: ['bla', 'ble', 'bli'] } }
 
-const parseSpecialOperator = (string) => {
-  const [key, subkey, value] = string.split(' ')
-
+const parseSpecialOperator = (key, operator, value) => {
   return {
     [key]: {
-      [`\$${subkey}`]: (value.startsWith('(')) ? value.replace(/[\(\)]/g, '').split(',') : value,
-    }
+      [`\$${operator}`]: value.startsWith('(')
+        ? value.replace(/[\(\)]/g, '').split(',')
+        : value,
+    },
   }
 }
 
@@ -22,10 +23,20 @@ const enigma = string => {
     const [key, operation, value] = elements
 
     switch (operation) {
-      case 'in': return parseSpecialOperator(string)
-      case 'not': return parseSpecialOperator(string)
-      case '=': return { [key.trim()]: value.trim() }
+      case 'in':
+      case 'not': {
+        return parseSpecialOperator(key, operation, value)
+      }
+      case '=': {
+        return { [key.trim()]: value.trim() }
+      }
     }
+  }
+
+  if (elements.length === 4) {
+    const [key, operation, subOperation, value] = elements
+
+    return parseSpecialOperator(key, 'nin', value)
   }
 
   return { name: elements[0] }
