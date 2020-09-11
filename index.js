@@ -13,7 +13,7 @@ const eNiGmA = (input) => {
       $or: clauses.map(getKeyValue),
     }
   }
-  
+
   return getKeyValue(input)
 }
 
@@ -23,6 +23,16 @@ const getKeyValue = (input) => {
     const [key, value] = input.split(' = ')
     return {
       [key]: value,
+    }
+  }
+
+  if (input.includes('not in')) {
+    const [key, valueString] = input.split(' not in ')
+    const cleanValueString = valueString.slice(1, -1)
+    const values = cleanValueString.split(',')
+
+    return {
+      [key]: { $nin: values }
     }
   }
 

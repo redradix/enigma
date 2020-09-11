@@ -102,4 +102,14 @@ describe('eNiGmA', () => {
       },
     ]
   )
+
+  example(
+    'Managing the input when receiving "not in" inside the input',
+    [
+      {
+        input: 'name not in (bla,ble)',
+        expected: { name: { $nin: ['bla', 'ble'] } },
+      }
+    ],
+  )
 })
