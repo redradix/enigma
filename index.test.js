@@ -94,4 +94,32 @@ describe('eNiGmA', () => {
       })
     })
   })
+
+  describe('Managing the input when receiving "or" inside the input', () => {
+    const SAMPLES = [
+      {
+        input: 'name = foo or tag = triki', expected: {
+          $or: [
+            { name: 'foo' },
+            { tag: 'triki' }
+          ]
+        }
+      },
+      {
+        input: 'name = foo or tag = triki or hello = goodbye', expected: {
+          $or: [
+            { name: 'foo' },
+            { tag: 'triki' },
+            { hello: 'goodbye' },
+          ]
+        }
+      },
+    ]
+
+    SAMPLES.forEach(sample => {
+      it(`expects ${sample.input} to return ${JSON.stringify(sample.expected)}`, () => {
+        expect(eNiGmA(sample.input)).toEqual(sample.expected)
+      })
+    })
+  })
 })

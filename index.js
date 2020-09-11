@@ -1,12 +1,20 @@
 const eNiGmA = (input) => {
+
   if (input.includes('and')) {
     const clauses = input.split(' and ')
     return {
       $and: clauses.map(getKeyValue),
     }
   }
-  return getKeyValue(input)
 
+  if (input.includes('or')) {
+    const clauses = input.split(' or ')
+    return {
+      $or: clauses.map(getKeyValue),
+    }
+  }
+  
+  return getKeyValue(input)
 }
 
 const getKeyValue = (input) => {
