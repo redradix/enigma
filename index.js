@@ -1,6 +1,8 @@
-const eNiGmA = (value) => {
+const eNiGmA = (input) => {
+  const [, value] = input.split(' = ')
+
   return {
-    name: value.includes('foo') ? 'foo' : 'bar'
+    name: value,
   }
 }
 
