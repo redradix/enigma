@@ -1,5 +1,5 @@
-const eNiGmA = () => {
-  return { name: 'foo' }
+const eNiGmA = (value) => {
+ return value.includes('foo') ? { name: 'foo' } : { name: 'bar' }
 }
 
 module.exports = {
