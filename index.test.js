@@ -1,19 +1,30 @@
 const { enigma } = require('./index')
 
 describe('eNiGmA', () => {
-  it("'name = foo' must return { name: 'foo' }", () => {
-    expect(enigma('name = foo')).toEqual({ name: 'foo' })
-  })
-  it("'bla' must return { name: 'bla' }", () => {
-    expect(enigma('bla')).toEqual({ name: 'bla' })
-  })
-  it("'tag = triki' must return { tag: triki }", () => {
-    expect(enigma('tag = triki')).toEqual({ tag: 'triki' })
-  })
-  it("'tag in (triki,traun)' must return { tag: { $in: ['triki', 'traun'] } }", () => {
-    expect(enigma('tag in (triki,traun)')).toEqual({ tag: { $in: ['triki', 'traun'] } })
-  })
-  it("'name not bla' => { name: { $not: 'bla' } }", () => {
-    expect(enigma('name not bla')).toEqual({ name: { $not: 'bla' } })
+  Array.of(
+    {
+      input: 'name = foo',
+      output: { name: 'foo' },
+    },
+    {
+      input: 'bla',
+      output: { name: 'bla' },
+    },
+    {
+      input: 'tag = triki',
+      output: { tag: 'triki' },
+    },
+    {
+      input: 'tag in (triki,traun)',
+      output: { tag: { $in: ['triki', 'traun'] } },
+    },
+    {
+      input: 'name not bla',
+      output: { name: { $not: 'bla' } },
+    },
+  ).forEach(({ input, output }) => {
+    it(`${ input } must return ${ JSON.stringify(output) }`, () => {
+      expect(enigma(input)).toEqual(output)
+    })
   })
 })
