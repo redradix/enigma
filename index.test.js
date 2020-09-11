@@ -1,11 +1,9 @@
-describe('eNiGmA', () => {
-  const SAMPLES = [
-    { input: 1, expected: 2 }
-  ]
+const { enigma } = require('./index')
+const { TestScheduler } = require('jest')
 
-  SAMPLES.forEach(sample => {
-    it(`expects ${sample.input} to return ${sample.expected}`, () => {
-      expect(1).toBe(2)
-    })
+
+describe('eNiGmA', () => {
+  it('returns { name: "foo" }', () => {
+    expect(enigma('name = foo')).toEqual({ name: 'foo' })
   })
 })
