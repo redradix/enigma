@@ -1,5 +1,6 @@
 // 'name = foo' => { name: 'foo' }
 // 'bla' => { name: 'bla' }
+// 'tag = triki' => { tag: triki }
 
 // string => obj
 const enigma = string => {
