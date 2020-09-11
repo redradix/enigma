@@ -40,7 +40,7 @@ const enigma = string => {
         return parseSpecialOperator(key, operation, value)
       }
       case '=': {
-        return { [key.trim()]: value.trim() }
+        return { [key]: value }
       }
     }
   }
