@@ -17,6 +17,12 @@ const parseSpecialOperator = (key, operator, value) => {
 
 // string => obj
 const enigma = string => {
+  if (string.includes('and')) {
+    return {
+      $and: string.split(' and ').map(enigma)
+    }
+  }
+
   const elements = string.split(' ')
 
   if (elements.length === 3) {
