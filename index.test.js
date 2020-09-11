@@ -30,6 +30,27 @@ describe('eNiGmA', () => {
       })
     })
   })
+
+  describe('Managing the input when receiving more than one value', () => {
+    const SAMPLES = [
+      {
+        input: 'name = foo and tag = triki', expected: {
+          $and: [
+            { name: 'foo' },
+            { tag: 'triki' }
+          ]
+        }
+      },
+      // { input: 'bar', expected: { name: 'bar' } },
+      // { input: 'lol', expected: { name: 'lol' } },
+    ]
+
+    SAMPLES.forEach(sample => {
+      it(`expects ${sample.input} to return ${JSON.stringify(sample.expected)}`, () => {
+        expect(eNiGmA(sample.input)).toEqual(sample.expected)
+      })
+    })
+  })
 })
 
 
