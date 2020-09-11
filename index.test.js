@@ -1,9 +1,10 @@
-const { enigma } = require('./index')
-const { TestScheduler } = require('jest')
-
+const { enigma } = require('./index')
 
 describe('eNiGmA', () => {
-  it('returns { name: "foo" }', () => {
+  it("'name = foo' must return { name: 'foo' }", () => {
     expect(enigma('name = foo')).toEqual({ name: 'foo' })
+  })
+  it("'bla' must return { name: 'bla' }", () => {
+    expect(enigma('bla')).toEqual({ name: 'bla' })
   })
 })

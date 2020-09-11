@@ -1,11 +1,11 @@
 // 'name = foo' => { name: 'foo' }
+// 'bla' => { name: 'bla' }
 
 // string => obj
 const enigma = (string) => {
-  const [ key, value ] = string.split('=')
-
+  const elements = string.split('=')
   return {
-    [key.trim()]: value.trim()
+    name: (elements.length === 1) ? elements[0] : elements[1].trim()
   }
 }
 
