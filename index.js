@@ -40,7 +40,10 @@ const enigma = string => {
 
   const key = elements[0]
   const operators = elements.slice(1, -1)
-  const value = elements[elements.length - 1]
+  const rawValue = elements[elements.length - 1]
+  const value = rawValue.startsWith('(')
+    ? rawValue.replace(/[\(\)]/g, '').split(',')
+    : rawValue
 
   if (arrayEquals(operators, ['='])) {
     return { [key]: value }
@@ -50,9 +53,7 @@ const enigma = string => {
     if (arrayEquals(operators, inOperator)) {
       return {
         [key]: {
-          [outOperator]: value.startsWith('(')
-            ? value.replace(/[\(\)]/g, '').split(',')
-            : value,
+          [outOperator]: value,
         },
       }
     }
