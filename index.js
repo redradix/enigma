@@ -17,6 +17,11 @@ const parseSpecialOperator = (key, operator, value) => {
   }
 }
 
+const arrayEquals = (array1, array2) => {
+  if (array1.length !== array2.length) return false
+  return array1.every((element, index) => element === array2[index])
+}
+
 // string => obj
 const enigma = string => {
   if (string.includes('and')) {
@@ -33,34 +38,28 @@ const enigma = string => {
 
   const elements = string.split(/\s+/)
 
-  if (elements.length === 3) {
-    const [key, operation, value] = elements
-
-    switch (operation) {
-      case 'in':
-      case 'not': {
-        return parseSpecialOperator(key, operation, value)
-      }
-      case '=': {
-        return { [key]: value }
-      }
-      default: {
-        throw new Error(ERROR_UNKNOWN_OPERATOR)
-      }
-    }
+  if (elements.length === 1) {
+    return { name: elements[0] }
   }
 
-  if (elements.length === 4) {
-    const [key, operation, subOperation, value] = elements
+  const key = elements[0]
+  const operation = elements.slice(1, -1)
+  const value = elements[elements.length - 1]
 
-    if (operation === 'not' && subOperation === 'in') {
-      return parseSpecialOperator(key, 'nin', value)
-    }
-
-    throw new Error(ERROR_UNKNOWN_OPERATOR)
+  if (arrayEquals(operation, ['in'])) {
+    return parseSpecialOperator(key, 'in', value)
+  }
+  if (arrayEquals(operation, ['not'])) {
+    return parseSpecialOperator(key, 'not', value)
+  }
+  if (arrayEquals(operation, ['='])) {
+    return { [key]: value }
+  }
+  if (arrayEquals(operation, ['not', 'in'])) {
+    return parseSpecialOperator(key, 'nin', value)
   }
 
-  return { name: elements[0] }
+  throw new Error(ERROR_UNKNOWN_OPERATOR)
 }
 
 module.exports = {
