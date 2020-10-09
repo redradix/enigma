@@ -42,6 +42,9 @@ const enigma = string => {
       case '=': {
         return { [key]: value }
       }
+      default: {
+        throw new Error('unknown operator')
+      }
     }
   }
 
