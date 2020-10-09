@@ -72,10 +72,16 @@ describe('eNiGmA', () => {
     })
   })
 
-  Array.of({
-    input: 'name bla foo',
-    exception: 'unknown operator',
-  }).forEach(({ input, exception }) => {
+  Array.of(
+    {
+      input: 'name bla foo',
+      exception: 'unknown operator',
+    },
+    {
+      input: 'name bla not foo',
+      exception: 'unknown operator',
+    },
+  ).forEach(({ input, exception }) => {
     it(`${input} must throw ${exception}`, () => {
       expect(() => enigma(input)).toThrow(exception)
     })
