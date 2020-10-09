@@ -89,6 +89,10 @@ describe('eNiGmA', () => {
       input: 'name = (bla,ble,bli)',
       exception: 'invalid literal value',
     },
+    {
+      input: '(bla,ble,bli)',
+      exception: 'invalid literal value',
+    },
   ).forEach(({ input, exception }) => {
     it(`${input} must throw ${exception}`, () => {
       expect(() => enigma(input)).toThrow(exception)
