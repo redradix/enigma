@@ -35,16 +35,18 @@ const enigma = string => {
 
   const elements = string.split(/\s+/)
 
-  if (elements.length === 1) {
-    return { name: elements[0] }
-  }
-
-  const key = elements[0]
-  const operators = elements.slice(1, -1)
   const rawValue = elements[elements.length - 1]
   const value = rawValue.startsWith('(')
     ? rawValue.replace(/[\(\)]/g, '').split(',')
     : rawValue
+
+  if (elements.length === 1) {
+    if (Array.isArray(value)) throw new Error(ERROR_INVALID_VALUE)
+    return { name: value }
+  }
+
+  const key = elements[0]
+  const operators = elements.slice(1, -1)
 
   if (arrayEquals(operators, ['='])) {
     if (Array.isArray(value)) throw new Error(ERROR_INVALID_VALUE)
