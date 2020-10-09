@@ -46,20 +46,24 @@ const enigma = string => {
   const operators = elements.slice(1, -1)
   const value = elements[elements.length - 1]
 
-  if (arrayEquals(operators, ['in'])) {
-    return buildOperation(key, 'in', value)
-  }
-  if (arrayEquals(operators, ['not'])) {
-    return buildOperation(key, 'not', value)
-  }
   if (arrayEquals(operators, ['='])) {
     return { [key]: value }
   }
+
+  let operator
+
+  if (arrayEquals(operators, ['in'])) {
+    operator = 'in'
+  }
+  if (arrayEquals(operators, ['not'])) {
+    operator = 'not'
+  }
   if (arrayEquals(operators, ['not', 'in'])) {
-    return buildOperation(key, 'nin', value)
+    operator = 'nin'
   }
 
-  throw new Error(ERROR_UNKNOWN_OPERATOR)
+  if (!operator) throw new Error(ERROR_UNKNOWN_OPERATOR)
+  return buildOperation(key, operator, value)
 }
 
 module.exports = {
