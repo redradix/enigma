@@ -43,19 +43,19 @@ const enigma = string => {
   }
 
   const key = elements[0]
-  const operation = elements.slice(1, -1)
+  const operators = elements.slice(1, -1)
   const value = elements[elements.length - 1]
 
-  if (arrayEquals(operation, ['in'])) {
+  if (arrayEquals(operators, ['in'])) {
     return buildOperation(key, 'in', value)
   }
-  if (arrayEquals(operation, ['not'])) {
+  if (arrayEquals(operators, ['not'])) {
     return buildOperation(key, 'not', value)
   }
-  if (arrayEquals(operation, ['='])) {
+  if (arrayEquals(operators, ['='])) {
     return { [key]: value }
   }
-  if (arrayEquals(operation, ['not', 'in'])) {
+  if (arrayEquals(operators, ['not', 'in'])) {
     return buildOperation(key, 'nin', value)
   }
 
