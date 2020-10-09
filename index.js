@@ -19,7 +19,7 @@ const parseSpecialOperator = (key, operator, value) => {
 const enigma = string => {
   if (string.includes('and')) {
     return {
-      $and: string.split(' and ').map(enigma),
+      $and: string.split(/\s+and\s+/).map(enigma),
     }
   }
 
