@@ -29,20 +29,26 @@ describe('eNiGmA', () => {
     {
       input: 'name = foo and tag = triki',
       output: {
-        $and: [
-          { name: 'foo' },
-          { tag: 'triki' },
-        ]
-      }
+        $and: [{ name: 'foo' }, { tag: 'triki' }],
+      },
     },
     {
       input: 'name = foo or tag = triki',
       output: {
-        $or: [
-          { name: 'foo' },
-          { tag: 'triki' },
-        ]
-      }
+        $or: [{ name: 'foo' }, { tag: 'triki' }],
+      },
+    },
+    {
+      input: 'name = foo or tag = triki or tag = tronki',
+      output: {
+        $or: [{ name: 'foo' }, { tag: 'triki' }, { tag: 'tronki' }],
+      },
+    },
+    {
+      input: 'name = foo or tag = triki or tag not tronki',
+      output: {
+        $or: [{ name: 'foo' }, { tag: 'triki' }, { tag: { $not: 'tronki' } }],
+      },
     },
   ).forEach(({ input, output }) => {
     it(`${input} must return ${JSON.stringify(output)}`, () => {
