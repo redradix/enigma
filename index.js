@@ -6,6 +6,7 @@
 // 'name not in (bla,ble,bli)' => { name: { $nin: ['bla', 'ble', 'bli'] } }
 
 const ERROR_UNKNOWN_OPERATOR = 'unknown operator'
+const ERROR_INVALID_VALUE = 'invalid literal value'
 
 const OPERATOR_MAP = [
   [['in'], '$in'],
@@ -46,6 +47,7 @@ const enigma = string => {
     : rawValue
 
   if (arrayEquals(operators, ['='])) {
+    if (Array.isArray(value)) throw new Error(ERROR_INVALID_VALUE)
     return { [key]: value }
   }
 
