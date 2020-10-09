@@ -54,6 +54,12 @@ describe('eNiGmA', () => {
       input: 'name  =  foo',
       output: { name: 'foo' },
     },
+    {
+      input: 'name = foo and  tag = triki',
+      output: {
+        $and: [{ name: 'foo' }, { tag: 'triki' }],
+      },
+    },
   ).forEach(({ input, output }) => {
     it(`${input} must return ${JSON.stringify(output)}`, () => {
       expect(enigma(input)).toEqual(output)
