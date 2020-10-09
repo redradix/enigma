@@ -25,7 +25,7 @@ const enigma = string => {
 
   if (string.includes('or')) {
     return {
-      $or: string.split(' or ').map(enigma),
+      $or: string.split(/\s+or\s+/).map(enigma),
     }
   }
 
