@@ -53,7 +53,11 @@ const enigma = string => {
   if (elements.length === 4) {
     const [key, operation, subOperation, value] = elements
 
-    return parseSpecialOperator(key, 'nin', value)
+    if (operation === 'not' && subOperation === 'in') {
+      return parseSpecialOperator(key, 'nin', value)
+    }
+
+    throw new Error(ERROR_UNKNOWN_OPERATOR)
   }
 
   return { name: elements[0] }
