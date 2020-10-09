@@ -5,6 +5,8 @@
 // 'name not bla' => { name: { $not: 'bla' } }
 // 'name not in (bla,ble,bli)' => { name: { $nin: ['bla', 'ble', 'bli'] } }
 
+const ERROR_UNKNOWN_OPERATOR = 'unknown operator'
+
 const parseSpecialOperator = (key, operator, value) => {
   return {
     [key]: {
@@ -43,7 +45,7 @@ const enigma = string => {
         return { [key]: value }
       }
       default: {
-        throw new Error('unknown operator')
+        throw new Error(ERROR_UNKNOWN_OPERATOR)
       }
     }
   }
