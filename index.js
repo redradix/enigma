@@ -29,7 +29,7 @@ const enigma = string => {
     }
   }
 
-  const elements = string.split(' ')
+  const elements = string.split(/\s+/)
 
   if (elements.length === 3) {
     const [key, operation, value] = elements
