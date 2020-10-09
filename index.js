@@ -1,11 +1,17 @@
 // 'name = foo' => { name: 'foo' }
-// 'bla' => { name: 'bla' }
+// 'OPERATOR_MAP' => { name: 'bla' }
 // 'tag = triki' => { tag: triki }
 // 'tag in (triki,traun)' => { tag: { $in: ['triki', 'traun'] } }
 // 'name not bla' => { name: { $not: 'bla' } }
 // 'name not in (bla,ble,bli)' => { name: { $nin: ['bla', 'ble', 'bli'] } }
 
 const ERROR_UNKNOWN_OPERATOR = 'unknown operator'
+
+const OPERATOR_MAP = [
+  [['in'], 'in'],
+  [['not'], 'not'],
+  [['not', 'in'], 'nin'],
+]
 
 const buildOperation = (key, operator, value) => {
   return {
@@ -46,17 +52,14 @@ const enigma = string => {
   const operators = elements.slice(1, -1)
   const value = elements[elements.length - 1]
 
-  if (arrayEquals(operators, ['in'])) {
-    return buildOperation(key, 'in', value)
-  }
-  if (arrayEquals(operators, ['not'])) {
-    return buildOperation(key, 'not', value)
-  }
   if (arrayEquals(operators, ['='])) {
     return { [key]: value }
   }
-  if (arrayEquals(operators, ['not', 'in'])) {
-    return buildOperation(key, 'nin', value)
+
+  for (const [inOperator, outOperator] of OPERATOR_MAP) {
+    if (arrayEquals(operators, inOperator)) {
+      return buildOperation(key, outOperator, value)
+    }
   }
 
   throw new Error(ERROR_UNKNOWN_OPERATOR)
