@@ -13,16 +13,6 @@ const OPERATOR_MAP = [
   [['not', 'in'], 'nin'],
 ]
 
-const buildOperation = (key, operator, value) => {
-  return {
-    [key]: {
-      [`\$${operator}`]: value.startsWith('(')
-        ? value.replace(/[\(\)]/g, '').split(',')
-        : value,
-    },
-  }
-}
-
 const arrayEquals = (array1, array2) => {
   if (array1.length !== array2.length) return false
   return array1.every((element, index) => element === array2[index])
@@ -58,7 +48,13 @@ const enigma = string => {
 
   for (const [inOperator, outOperator] of OPERATOR_MAP) {
     if (arrayEquals(operators, inOperator)) {
-      return buildOperation(key, outOperator, value)
+      return {
+        [key]: {
+          [`\$${outOperator}`]: value.startsWith('(')
+            ? value.replace(/[\(\)]/g, '').split(',')
+            : value,
+        },
+      }
     }
   }
 
