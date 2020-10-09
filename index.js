@@ -8,9 +8,9 @@
 const ERROR_UNKNOWN_OPERATOR = 'unknown operator'
 
 const OPERATOR_MAP = [
-  [['in'], 'in'],
-  [['not'], 'not'],
-  [['not', 'in'], 'nin'],
+  [['in'], '$in'],
+  [['not'], '$not'],
+  [['not', 'in'], '$nin'],
 ]
 
 const arrayEquals = (array1, array2) => {
@@ -50,7 +50,7 @@ const enigma = string => {
     if (arrayEquals(operators, inOperator)) {
       return {
         [key]: {
-          [`\$${outOperator}`]: value.startsWith('(')
+          [outOperator]: value.startsWith('(')
             ? value.replace(/[\(\)]/g, '').split(',')
             : value,
         },
