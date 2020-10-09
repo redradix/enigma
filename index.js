@@ -7,7 +7,7 @@
 
 const ERROR_UNKNOWN_OPERATOR = 'unknown operator'
 
-const parseSpecialOperator = (key, operator, value) => {
+const buildOperation = (key, operator, value) => {
   return {
     [key]: {
       [`\$${operator}`]: value.startsWith('(')
@@ -47,16 +47,16 @@ const enigma = string => {
   const value = elements[elements.length - 1]
 
   if (arrayEquals(operation, ['in'])) {
-    return parseSpecialOperator(key, 'in', value)
+    return buildOperation(key, 'in', value)
   }
   if (arrayEquals(operation, ['not'])) {
-    return parseSpecialOperator(key, 'not', value)
+    return buildOperation(key, 'not', value)
   }
   if (arrayEquals(operation, ['='])) {
     return { [key]: value }
   }
   if (arrayEquals(operation, ['not', 'in'])) {
-    return parseSpecialOperator(key, 'nin', value)
+    return buildOperation(key, 'nin', value)
   }
 
   throw new Error(ERROR_UNKNOWN_OPERATOR)
