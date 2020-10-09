@@ -1,10 +1,3 @@
-// 'name = foo' => { name: 'foo' }
-// 'OPERATOR_MAP' => { name: 'bla' }
-// 'tag = triki' => { tag: triki }
-// 'tag in (triki,traun)' => { tag: { $in: ['triki', 'traun'] } }
-// 'name not bla' => { name: { $not: 'bla' } }
-// 'name not in (bla,ble,bli)' => { name: { $nin: ['bla', 'ble', 'bli'] } }
-
 const ERROR_UNKNOWN_OPERATOR = 'unknown operator'
 const ERROR_INVALID_VALUE = 'invalid literal value'
 
